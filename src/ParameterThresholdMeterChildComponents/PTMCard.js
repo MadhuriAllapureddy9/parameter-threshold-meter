@@ -1,12 +1,13 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
-import AddParameterModal from './AddParameterModal';
+import AddParameterModal from './AddParameterModal-copy';
 import DropDownCategory from './DropDownCategory';
 import DropDownPhase from './DropDownPhase';
 import ParameterThresholdTable from './ParameterThresholdTable';
+import SearchField from './SearchField'
 
-export default function ComposedTextField() {
+export default function PTMCard() {
 
   return (
     <Box
@@ -19,7 +20,7 @@ export default function ComposedTextField() {
     >
       <div align='left'><AddParameterModal /></div>
       <div align="left">Please Select:</div>
-
+      
       <FormControl>
       <DropDownCategory/>
       </FormControl>
@@ -27,7 +28,7 @@ export default function ComposedTextField() {
       <FormControl >
       <DropDownPhase />
       </FormControl>
-
+      <SearchField/>
       <ParameterThresholdTable />
     </Box>
   );

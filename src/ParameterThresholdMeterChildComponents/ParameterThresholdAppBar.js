@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,9 +9,6 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Container } from '@mui/material';
 import { Tooltip } from '@mui/material';
 import Menu from '@mui/material/Menu';
-import { MenuItem } from '@mui/material';
-import { Button } from '@mui/material';
-import { style } from '@mui/system';
 import { Grid } from '@mui/material';
 
 const ParameterThresholdAppBar = () => {
@@ -39,11 +35,11 @@ const ParameterThresholdAppBar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
+        <Typography
             variant="h6"
             noWrap
             component="div"
-            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+            sx={{ mr: 1, display: { xs: 'none', md: 'flex' } }}
           >
           </Typography>
           <Grid container spacing={2}> 

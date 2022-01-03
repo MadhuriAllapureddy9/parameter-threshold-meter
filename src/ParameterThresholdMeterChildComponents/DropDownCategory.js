@@ -15,12 +15,12 @@ export default function DropDownCategory() {
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Meter Subcategory :</InputLabel>
+        <InputLabel id="demo-simple-select-label">Meter Subcategory</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={meter}
-          label="Select Subcategory :"
+          label="Select Subcategory"
           onChange={handleChange}
         >
           <MenuItem value={10}>Non-Domestic/Commercial</MenuItem>

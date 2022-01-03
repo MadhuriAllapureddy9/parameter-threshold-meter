@@ -15,12 +15,12 @@ export default function DropDownPhase() {
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Meter Phase :</InputLabel>
+        <InputLabel id="demo-simple-select-label">Meter Phase</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={phase}
-          label="Meter Phase :"
+          label="Meter Phase"
           onChange={handleChange}
         >
           <MenuItem value={10}>1 Ph</MenuItem>

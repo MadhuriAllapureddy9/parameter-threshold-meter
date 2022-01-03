@@ -8,7 +8,7 @@ function ParameterThresholdMeterPage() {
   return (
     <div >
      <ParameterThresholdAppBar />
-     <div className="App"> <PTMCard /></div>
+     <PTMCard />
     </div>
   );
 }
