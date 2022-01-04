@@ -13,7 +13,8 @@ import ModalAppBar from './ModalAppBar';
 import { Typography } from '@mui/material';
 import ParameterTextField from './ParameterTextField';
 import UsernameTextField from './UsernameTextField';
-import MinMaxField from './MinMaxField';
+import MinField from './MinField';
+import MaxField from './MaxField';
 
 const style = {
   position: 'absolute',
@@ -42,7 +43,7 @@ export default function NestedModal() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Add Parameter</Button>
+      <Button variant="contained" onClick={handleOpen}>Add Parameter</Button>
       <Modal
         hideBackdrop
         open={open}
@@ -74,10 +75,10 @@ export default function NestedModal() {
               <UsernameTextField/>
             </Grid>
             <Grid item xs={6}>
-              {/* <MinMaxField/> */}
+              <MinField/>
             </Grid>
             <Grid item xs={6}>
-
+              <MaxField/>
             </Grid>
           </Grid>
           

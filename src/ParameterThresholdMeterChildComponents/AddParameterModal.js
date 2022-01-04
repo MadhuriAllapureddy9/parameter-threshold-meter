@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper';
 import ModalAppBar from './ModalAppBar';
 import ParameterTextField from './ParameterTextField';
 import UsernameTextField from './UsernameTextField';
-import MinMaxField from './MinMaxField';
+import MinMaxField from './MinField';
 
 const style = {
   position: 'absolute',

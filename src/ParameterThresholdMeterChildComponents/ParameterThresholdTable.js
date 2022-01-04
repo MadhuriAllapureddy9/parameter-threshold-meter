@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,35 +7,44 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { makeStyles } from '@mui/material';
 
 const columns = [
   { id: 'name', label: 'S.No', minWidth: 10 },
-  { id: 'code', label: 'Parameter Name', minWidth: 40 },
+  { id: 'code', label: 'Parameter Name', minWidth: 10 },
   {
     id: 'population',
     label: 'Min(Value)',
-    minWidth: 40,
+    minWidth: 10,
     format: (value) => value.toLocaleString('en-US'),
   },
   {
     id: 'size',
     label: 'Max(Value)',
-    minWidth: 40,
+    minWidth: 10,
     format: (value) => value.toLocaleString('en-US'),
   },
   {
     id: 'density',
     label: 'Min(%)',
-    minWidth: 40,
+    minWidth: 10,
     format: (value) => value.toFixed(2),
   },
   {
     id: 'modify',
     label: 'Modify',
-    minWidth: 40,
+    minWidth: 10,
     format: (value) => value.toFixed(2),
   },
 ];
+
+const commonStyles = {
+  bgcolor: 'background.paper',
+  
+  border: 1,
+ 
+  
+}; 
 
 function createData(name, code, population, size) {
   const density = population / size;
@@ -48,6 +57,7 @@ const rows = [
 ];
 
 export default function StickyHeadTable() {
+  
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -61,7 +71,7 @@ export default function StickyHeadTable() {
   };
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+    <Box sx={{ ...commonStyles, borderColor: 'primary.main',borderRadius: 0}}>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -108,6 +118,6 @@ export default function StickyHeadTable() {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-    </Paper>
+    </Box>
   );
 }
