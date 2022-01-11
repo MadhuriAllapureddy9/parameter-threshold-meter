@@ -17,6 +17,7 @@ export default function DropDownCategory() {
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Meter Subcategory</InputLabel>
         <Select
+        
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={meter}

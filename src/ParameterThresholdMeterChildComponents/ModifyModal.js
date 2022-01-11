@@ -34,7 +34,7 @@ const style = {
   pb: 3,
 };
 
-export default function NestedModal() {
+export default function ModifyModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -45,7 +45,7 @@ export default function NestedModal() {
 
   return (
     <div>
-      <Button variant="contained" onClick={handleOpen}>Add Parameter</Button>
+      <Button variant="contained" onClick={handleOpen}>Modify</Button>
       <Modal
         hideBackdrop
         open={open}
@@ -56,7 +56,7 @@ export default function NestedModal() {
         <Box sx={style}>
           <Grid container rowSpacing={3} columnSpacing={{ xs: 2, sm: 3, md: 4 }}>
             <Grid item xs={6}>
-              <Typography variant='h6' >Add New Parameter</Typography>
+              <Typography variant='h6' >Update Parameter</Typography>
             </Grid>
             <Grid item xs={4}>
               

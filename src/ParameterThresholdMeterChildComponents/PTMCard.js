@@ -9,33 +9,32 @@ import SearchField from './SearchField'
 import { Grid, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Paper } from '@mui/material';
+import DDL from './DDL';
 
 
-
-export default function PTMCard() {
+const PTMCard = () => {
 
   return (
     <Box sx={{ display: 'flex', p: 1, m: 2, bgcolor: 'background.paper', flexDirection: 'column', }}
-        >
+    >
       <div align='left'><AddParameterModal /></div>
-      <Typography variant="h6" align="left" varient='h2' sx={{pt:2 , m: 0}} >Please Select:</Typography>
-      <Grid sx={{ flexGrow: 1, p: 1, m: 0}} container spacing={2}>
-  <Grid item xs={3} >
-    <DropDownCategory/>
-  </Grid>
-  <Grid item xs={3}>
-  <DropDownPhase/>
-  </Grid>
-  <Grid item xs={3}>
-    
-  </Grid>
-  <Grid item xs={3}>
-    
-  </Grid>
-</Grid>
-      
-      <SearchField/>
+      <Typography variant="h6" align="left" sx={{ pt: 2, m: 0 }} >Please Select:</Typography>
+
+      <Grid container direction="row" sx={{ flexGrow: 1, p: 1, m: 0 }} spacing={2}>
+        <form>
+          <Grid item xs={12} >
+            <DDL />
+          </Grid>
+          
+        </form>
+      </Grid>
+      <Grid sx={{ pt: 1, pb: 2 }}>
+        <SearchField />
+      </Grid>
       <ParameterThresholdTable />
     </Box>
   );
 }
+
+
+export default PTMCard;
