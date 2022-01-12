@@ -2,13 +2,9 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import AddParameterModal from './AddParameterModal-copy';
-import DropDownCategory from './DropDownCategory';
-import DropDownPhase from './DropDownPhase';
 import ParameterThresholdTable from './ParameterThresholdTable';
 import SearchField from './SearchField'
 import { Grid, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { Paper } from '@mui/material';
 import DDL from './DDL';
 
 

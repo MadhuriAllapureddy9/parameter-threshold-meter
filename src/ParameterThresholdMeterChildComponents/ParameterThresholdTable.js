@@ -1,83 +1,106 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios"
-import { Table, TableCell, TableHead, TableRow, TableBody } from "@mui/material";
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
+import * as React from 'react';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  p: 4,
-};
-function ParameterThresholdTable() {
-  const [posts, setPosts] = useState([])
-  useEffect(() => {
+const columns = [
+	{ id: 'name', label: 'S.No', minWidth: 10 },
+	{ id: 'code', label: 'Parameter Name', minWidth: 40 },
+	{
+		id: 'population',
+		label: 'Min(Value)',
+		minWidth: 40,
+		format: (value) => value.toLocaleString('en-US')
+	},
+	{
+		id: 'size',
+		label: 'Max(Value)',
+		minWidth: 40,
+		format: (value) => value.toLocaleString('en-US')
+	},
+	{
+		id: 'density',
+		label: 'Min(%)',
+		minWidth: 40,
+		format: (value) => value.toFixed(2)
+	},
+	{
+		id: 'modify',
+		label: 'Modify',
+		minWidth: 40,
+		format: (value) => value.toFixed(2)
+	}
+];
 
-    axios.get("https://fakestoreapi.com/products")
-      .then(res => {
-
-        setPosts(res.data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  })
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-
-  }
- 
-  const handleClose = () => setOpen(false);
-  return (
-    <div>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>S.No</TableCell>
-            <TableCell>Parameter Name</TableCell>
-            <TableCell>Min(Value)</TableCell>
-            <TableCell>Max(Value)</TableCell>
-            <TableCell>Min(%)</TableCell>
-            <TableCell>Max(%)</TableCell>
-            <TableCell>Modify</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {posts.map((post) => (
-            <TableRow key={post.id} >
-
-              <TableCell><Button onClick={handleOpen}>{post.id}</Button>
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="modal-modal-title"
-                  aria-describedby="modal-modal-description"
-                >
-                  <Box sx={style} >
-                    {posts.filter(item =>item.id === posts.id)}
-                    <h4> ID:{post.id}</h4>
-                    <h4>Title:{post.title}</h4>
-                    <h4>category:{post.category}</h4>
-                    <h4>Rating:{post.rating.count}</h4>
-                  </Box>
-                </Modal></TableCell>
-              <TableCell>{post.title}</TableCell>
-              <TableCell>{post.category}</TableCell>
-              <TableCell>{post.description}</TableCell>
-
-
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
-  )
+function createData(name, code, population, size) {
+	const density = population / size;
+	return { name, code, population, size, density };
 }
-export default ParameterThresholdTable;
+
+const rows = [ createData('01'), createData('02') ];
+
+export default function StickyHeadTable() {
+	const [ page, setPage ] = React.useState(0);
+	const [ rowsPerPage, setRowsPerPage ] = React.useState(10);
+
+	const handleChangePage = (event, newPage) => {
+		setPage(newPage);
+	};
+
+	const handleChangeRowsPerPage = (event) => {
+		setRowsPerPage(+event.target.value);
+		setPage(0);
+	};
+
+	return (
+		<Paper sx={{ width: '100%', overflow: 'hidden' }} variant="outlined" square>
+			<TableContainer sx={{ maxHeight: 440 }}>
+				<Table stickyHeader aria-label="sticky table">
+					<TableHead>
+						<TableRow>
+							{columns.map((column) => (
+								<TableCell key={column.id} align={column.align} style={{ minWidth: column.minWidth }}>
+									{column.label}
+								</TableCell>
+							))}
+						</TableRow>
+					</TableHead>
+					<TableBody>
+						{rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+							return (
+								<TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+									{columns.map((column) => {
+										const value = row[column.id];
+										return (
+											<TableCell key={column.id} align={column.align}>
+												{column.format && typeof value === 'number' ? (
+													column.format(value)
+												) : (
+													value
+												)}
+											</TableCell>
+										);
+									})}
+								</TableRow>
+							);
+						})}
+					</TableBody>
+				</Table>
+			</TableContainer>
+			<TablePagination
+				rowsPerPageOptions={[ 10, 25, 100 ]}
+				component="div"
+				count={rows.length}
+				rowsPerPage={rowsPerPage}
+				page={page}
+				onPageChange={handleChangePage}
+				onRowsPerPageChange={handleChangeRowsPerPage}
+			/>
+		</Paper>
+	);
+}

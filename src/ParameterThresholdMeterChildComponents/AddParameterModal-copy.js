@@ -8,7 +8,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 // custom imports
 import DropDownCategory from './DropDownCategory';
-import DropDownPhase from './DropDownPhase';
+import DDL from './DDL';
 import ModalAppBar from './ModalAppBar';
 import { Typography } from '@mui/material';
 import ParameterTextField from './ParameterTextField';
@@ -64,11 +64,8 @@ export default function NestedModal() {
             <Grid item xs={2}>
               <Button onClick={handleClose}><CloseIcon/></Button>
             </Grid>
-            <Grid item xs={6}>
-              <DropDownCategory />
-            </Grid>
-            <Grid item xs={6}>
-              <DropDownPhase />
+            <Grid item xs={12}>
+              <DDL />
             </Grid>
             <Grid item xs={6}>
               <ParameterTextField/>

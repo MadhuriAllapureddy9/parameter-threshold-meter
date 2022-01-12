@@ -1,52 +1,79 @@
-import React, { useState, useEffect, Component } from "react";
-import axios from "axios"
-import { Table, TableCell, TableHead, TableRow, TableBody } from "@mui/material";
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
+import React, { useState, useEffect } from "react";
+import Select from "react-select";
+import data from './data.json';
+import { Box } from "@mui/material";
+import { Grid } from "@mui/material";
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
 
-class DDL extends React.Component{
-    constructor(){
-        super();
-        this.state={
-            DDL1:[],
-            DDL2:[],
-            selectDDL:'',
-        };
-    }
-    componentDidMount(){
-        this.setState({
-            DDL1:[
-                {name:'Colors', DDL2:['Red', 'Black', 'orange','Blue']},
-                {name:'Sports', DDL2:['Cricket', 'Rugby', 'Boxing','Swimming']},
-                {name:'Fruits', DDL2:['Apple', 'Cherry', 'Kiwi','Mango']},
-                {name:'CountryNames', DDL2:['India', 'Japan', 'UK','USA']},
-            ]
-        });
-    }
-    selectChange(e){
-        this.setState({selectDDL:e.target.value});
-        this.setState({DDL2:this.state.DDL1.find(x=> x.name === e.target.value).DDL2});
-    }
-    render(){
-        return(
-            <div align='center'>
-                <select  value={this.state.selectDDL} onChange={this.selectChange.bind(this)}>
-                    <option>----Select----</option>
-                    {this.state.DDL1.map(x => {
-                        return <option>{x.name}</option>
-                    })}
-                </select>
-                <select>
-                    <option selected disabled>----------------</option>
-                    {
-                        this.state.DDL2.map(x =>{
-                            return <option>{x}</option>
-                        })
-                    }
-                </select>
-            </div>
-        )
-    }
+const style = {
+  width: 400,
+  pt: 2,
+};
+
+const DDL = () => {
+
+  const [country, setCountry] = useState(null);
+  const [lang, setLang] = useState(null);
+  const [langList, setLangList] = useState([]);
+ 
+  // handle change event of the country dropdown
+  const handleCategoryChange = (obj) => {
+    setCountry(obj);
+    setLangList(obj.languages);
+    setLang(null);
+  };
+  
+  // handle change event of the language dropdown
+  const handlePhaseChange = (obj) => {
+    setLang(obj);
+  };
+
+  // generate the link when both dropdowns are selected
+  useEffect(() => {
+    
+      const handleCategoryChange = (obj) => {
+        setCountry(obj);
+        setLangList(obj.languages);
+        setLang(null);
+      };
+      const handlePhaseChange = (obj) => {
+        setLang(obj);
+      };
+  }, [country, lang]);
+
+  return (
+    <div>
+      <Box sx={style}>
+      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      <Grid item xs={6}>
+        <b>Meter Subcategory</b>
+        <Select
+          placeholder="Select Category"
+          value={country}
+          options={data}
+          onChange={handleCategoryChange}
+          getOptionLabel={x => x.region}
+          getOptionValue={x => x.country_code}
+          
+        />
+        </Grid>
+        <Grid item xs={6}>
+        <b>Meter Phase</b>
+        <Select
+          placeholder="Select Phase"
+          value={lang}
+          options={langList}
+          onChange={handlePhaseChange}
+          getOptionLabel={x => x.name}
+          getOptionValue={x => x.code}
+        />
+        </Grid>
+        
+      </Grid>
+      </Box>
+    </div>
+  );
 }
+
 export default DDL;

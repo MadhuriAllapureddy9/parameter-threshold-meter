@@ -56,7 +56,7 @@ const ParameterThresholdAppBar = () => {
           
           
           <Grid item xs={12}>
-              <Typography variant='h5'>Parameter Threshold Meter</Typography>
+              <Typography variant='h5'>Parameter Threshold Master</Typography>
             </Grid>
             </Grid>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
